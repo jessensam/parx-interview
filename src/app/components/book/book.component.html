@@ -1,0 +1,136 @@
+<div>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="filter table data" #input>
+</div>
+
+<table mat-table [dataSource]="dataSource" matSort #empTbSort="matSort" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+            Id
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">
+            Type
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="self">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by self">
+            Self
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon [matTooltip]="element.links.self" aria-hidden="false" aria-label="Example home icon"
+                fontIcon="link"></mat-icon>
+        </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="urn">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by urn">
+            URN
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon [matTooltip]="element.attributes.urn" aria-hidden="false" aria-label="Example home icon"
+                fontIcon="link">
+            </mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by Date">
+            Created at
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.attributes.created_at | date }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="updated_at">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by Date">
+            Updated_at
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.attributes.updated_at | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by content">
+            content
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.attributes.content}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="properties">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by properties">
+            properties
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.attributes.properties}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="displaytype">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by type">
+            Display Type
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.attributes.display_properties.type}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>
+            Display Image
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <img [src]="element.attributes.display_properties.image" />
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="autherlinkself">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by autherlinkself">
+            Auther link Self
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon [matTooltip]="element.relationships.authors.links.self" aria-hidden="false"
+                aria-label="Example home icon" fontIcon="link">
+            </mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="autherlinkrelated">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by autherlinkrelated">
+            Auther link related
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon [matTooltip]="element.relationships.authors.links.related" aria-hidden="false"
+                aria-label="Example home icon" fontIcon="link">
+            </mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="publisherslinkself">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by autherlinkself">
+            publishers link Self
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon [matTooltip]="element.relationships.publishers.links.self" aria-hidden="false"
+                aria-label="Example home icon" fontIcon="link">
+            </mat-icon>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="publisherslinkrelated">
+        <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by publisherslinkrelated">
+            publishers link related
+        </th>
+        <td mat-cell *matCellDef="let element">
+            <mat-icon [matTooltip]="element.relationships.publishers.links.related" aria-hidden="false"
+                aria-label="Example home icon" fontIcon="link">
+            </mat-icon>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+</mat-paginator>
